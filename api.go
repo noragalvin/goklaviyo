@@ -87,7 +87,6 @@ func (api API) Request(method, path string, params QueryParams, body, response i
 	queryParams := req.URL.Query()
 	queryParams.Add("api_key", api.Key)
 	req.URL.RawQuery = queryParams.Encode()
-	log.Println(req.URL.String())
 
 	if params != nil && !reflect.ValueOf(params).IsNil() {
 		queryParams := req.URL.Query()
@@ -124,8 +123,6 @@ func (api API) Request(method, path string, params QueryParams, body, response i
 	if err != nil {
 		return err
 	}
-
-	log.Println(string(data))
 
 	if resp.StatusCode >= 200 && resp.StatusCode < 300 {
 		// Do not unmarshall response is nil
